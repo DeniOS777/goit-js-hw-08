@@ -3,7 +3,9 @@ import Player from '@vimeo/player';
 const iframe = document.querySelector('#vimeo-player');
 const player = new Vimeo.Player(iframe);
 
-let currentTimeSaved = localStorage.getItem('videoplayer-current-time');
+let currentTimeSaved = JSON.parse(
+  localStorage.getItem('videoplayer-current-time'),
+);
 
 player.getVideoTitle().then(function (title) {
   console.log('title:', title);
@@ -23,11 +25,9 @@ player
   .catch(function (error) {
     switch (error.name) {
       case 'RangeError':
-        // the time was less than 0 or greater than the video’s duration
         break;
 
       default:
-        // some other error occurred
         break;
     }
   });
