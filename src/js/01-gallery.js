@@ -1,8 +1,8 @@
 // Add imports above this line
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min';
-
 import { galleryItems } from './gallery-items';
+import 'simplelightbox';
+
+import 'simplelightbox/dist/simple-lightbox.min.css';
 // Change code below this line
 
 const listGalleryRef = document.querySelector('.gallery');
