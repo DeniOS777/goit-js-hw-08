@@ -1,22 +1,24 @@
 import Player from '@vimeo/player';
+import throttle from 'lodash.throttle';
 
 const iframe = document.querySelector('#vimeo-player');
 
 const player = new Player(iframe);
 
-let currentTimeSaved = JSON.parse(
-  localStorage.getItem('videoplayer-current-time'),
-);
+let currentTimeSaved = JSON.parse(localStorage.getItem('videoplayer-current-time'));
 
 player.getVideoTitle().then(function (title) {
   console.log('title:', title);
 });
 
-player.on('timeupdate', function (data) {
-  let currentTime = data.seconds;
-  console.log(`Текущее время видео:`, currentTime);
-  localStorage.setItem('videoplayer-current-time', JSON.stringify(currentTime));
-});
+player.on(
+  'timeupdate',
+  throttle(function (data) {
+    let currentTime = data.seconds.toFixed();
+    console.log(`Текущее время видео:`, currentTime);
+    localStorage.setItem('videoplayer-current-time', JSON.stringify(currentTime));
+  }, 1000),
+);
 
 player
   .setCurrentTime(currentTimeSaved)
