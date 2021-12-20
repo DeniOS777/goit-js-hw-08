@@ -14,7 +14,7 @@ function onLoad() {
   try {
     const dataLocalStorage = JSON.parse(saveDataForm);
 
-    if (saveDataForm === null) {
+    if (!saveDataForm) {
       return;
     }
 
