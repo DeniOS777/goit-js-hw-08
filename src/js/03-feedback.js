@@ -10,13 +10,19 @@ onLoad();
 
 function onLoad() {
   let saveDataForm = localStorage.getItem('feedback-form-state');
-  const formDataLocalStorage = JSON.parse(saveDataForm);
 
-  if (saveDataForm === null) {
-    return;
+  try {
+    const dataLocalStorage = JSON.parse(saveDataForm);
+
+    if (saveDataForm === null) {
+      return;
+    }
+
+    writeValueToFormFields(dataLocalStorage);
+  } catch (error) {
+    console.log(`${error.name}: ${error.message}`);
+    console.error('Данные в локальном хранилище повреждены!');
   }
-
-  writeValueToFormFields(formDataLocalStorage);
 }
 
 function writeValueToFormFields(data) {
