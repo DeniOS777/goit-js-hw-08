@@ -1,5 +1,4 @@
 import throttle from 'lodash.throttle';
-// import debounce from 'lodash.debounce';
 
 const refs = {
   form: document.querySelector('.feedback-form'),
@@ -17,8 +16,12 @@ function onLoad() {
     return;
   }
 
-  refs.input.value = formDataLocalStorage.email;
-  refs.textarea.value = formDataLocalStorage.message;
+  writeValueToFormFields(formDataLocalStorage);
+}
+
+function writeValueToFormFields(data) {
+  refs.input.value = data.email;
+  refs.textarea.value = data.message;
 }
 
 function onInputEnterValue() {
@@ -35,7 +38,14 @@ function onInputEnterValue() {
 
 function onButtonClickClearForm(e) {
   e.preventDefault();
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+
+  try {
+    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  } catch (error) {
+    console.log(`${error.name}: ${error.message}`);
+    console.error('Данные в локальном хранилище повреждены!');
+  }
+
   localStorage.removeItem('feedback-form-state');
   refs.form.reset();
 }
