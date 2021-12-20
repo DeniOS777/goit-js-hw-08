@@ -21,10 +21,10 @@ function onLoad() {
   refs.textarea.value = formDataLocalStorage.message;
 }
 
-function onInputEnterValue(e) {
+function onInputEnterValue() {
   const {
     elements: { email, message },
-  } = e.currentTarget;
+  } = refs.form;
 
   const formData = {
     email: email.value.trim(),
