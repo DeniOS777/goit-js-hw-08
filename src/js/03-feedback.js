@@ -19,9 +19,10 @@ function onLoad() {
     }
 
     writeValueToFormFields(dataLocalStorage);
+    console.log('✅ Данные успешно восстановлены из локального хранилища');
   } catch (error) {
     console.log(`${error.name}: ${error.message}`);
-    console.error('Данные в локальном хранилище повреждены!');
+    console.error('❌ Данные в локальном хранилище повреждены❗️');
   }
 }
 
@@ -44,15 +45,15 @@ function onInputEnterValue() {
 
 function onButtonClickClearForm(e) {
   e.preventDefault();
+  localStorage.removeItem('feedback-form-state');
   const emailValue = refs.input.value;
   const messageValue = refs.textarea.value;
 
   if (emailValue === '' || messageValue === '') {
-    return alert('Заполните поля Email и Message');
+    return alert('Заполните обязательные поля Email и Message:');
   }
 
   console.log({ email: emailValue, message: messageValue });
-  localStorage.removeItem('feedback-form-state');
   refs.form.reset();
 }
 
