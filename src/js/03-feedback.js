@@ -22,7 +22,7 @@ function onLoad() {
     console.log('✅ Данные успешно восстановлены из локального хранилища');
   } catch (error) {
     console.log(`${error.name}: ${error.message}`);
-    console.error('❌ Данные в локальном хранилище повреждены❗️');
+    console.error('❌ Данные в локальном хранилище повреждены!');
   }
 }
 
