@@ -44,14 +44,14 @@ function onInputEnterValue() {
 
 function onButtonClickClearForm(e) {
   e.preventDefault();
+  const emailValue = refs.input.value;
+  const messageValue = refs.textarea.value;
 
-  try {
-    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  } catch (error) {
-    console.log(`${error.name}: ${error.message}`);
-    console.error('Данные в локальном хранилище повреждены!');
+  if (emailValue === '' || messageValue === '') {
+    return alert('Заполните поля Email и Message');
   }
 
+  console.log({ email: emailValue, message: messageValue });
   localStorage.removeItem('feedback-form-state');
   refs.form.reset();
 }
